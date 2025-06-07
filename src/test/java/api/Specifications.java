@@ -21,9 +21,9 @@ public class Specifications {
                 .expectStatusCode(200)
                 .build();
     }
-    public static ResponseSpecification responseSpec400(){
+    public static ResponseSpecification responseSpec404(){
         return new ResponseSpecBuilder()
-                .expectStatusCode(400)
+                .expectStatusCode(404)
                 .build();
     }
 
