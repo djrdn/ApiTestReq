@@ -1,6 +1,9 @@
 package api;
 
-import io.restassured.http.ContentType;
+import api.data.Register;
+import api.data.SuccessReg;
+import api.data.UserData;
+import api.spec.Specifications;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -26,7 +29,7 @@ public class ReqresTest {
 //            Assert.assertTrue(x.getAvatar().contains(x.getId().toString()));
 //        });
 //
-//        Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in")));
+       Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in")));
 
         List<String> avatar = users.stream().map(UserData::getAvatar).collect(Collectors.toList());
         List<String> ids = users.stream().map(x->x.getId().toString()).collect(Collectors.toList());

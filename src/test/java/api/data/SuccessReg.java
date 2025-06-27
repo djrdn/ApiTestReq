@@ -1,4 +1,4 @@
-package api;
+package api.data;
 
 public class SuccessReg {
     public SuccessReg(Integer id, String token) {

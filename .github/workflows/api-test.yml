@@ -1,0 +1,36 @@
+name: API Tests CI
+
+# 🔁 Запускати після кожного пушу в гілку homework
+on:
+  push:
+    branches: [ homework ]
+  pull_request:
+    branches: [ homework ]
+
+jobs:
+  run-api-tests:
+    name: 🧪 Run API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Скачати репозиторій
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2️⃣ Встановити Java 17 (можна змінити, якщо інша)
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 3️⃣ Запустити тести за допомогою Maven
+      - name: Run tests
+        run: mvn clean test
+
+      # 4️⃣ Завантажити звіти про тести (Surefire)
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
