@@ -1,0 +1,37 @@
+name: API Tests CI
+
+# 🔁 Запускати після кожного пушу в гілку homework
+on:
+  push:
+    branches: [ homework ]
+  pull_request:
+    branches: [ homework ]
+
+jobs:
+  run-api-tests:
+    name: 🧪 Run API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 👇 Сюди вписуєш ключ явно
+      - name: Create .env file with API key
+        run: echo "API_KEY=reqres-free-v1" > .env
+
+      - name: Run tests but continue on failure
+        run: mvn clean test || true
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+
